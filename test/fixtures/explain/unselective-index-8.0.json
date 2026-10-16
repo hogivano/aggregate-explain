@@ -1,0 +1,59 @@
+{
+  "explainVersion": "1",
+  "queryPlanner": {
+    "namespace": "shop.tickets",
+    "parsedQuery": {
+      "$and": [
+        { "status": { "$eq": "open" } },
+        { "assigneeId": { "$eq": "u_3311" } }
+      ]
+    },
+    "optimizedPipeline": true,
+    "planCacheShapeHash": "B27F0A19",
+    "winningPlan": {
+      "stage": "FETCH",
+      "filter": { "assigneeId": { "$eq": "u_3311" } },
+      "inputStage": {
+        "stage": "IXSCAN",
+        "keyPattern": { "status": 1 },
+        "indexName": "status_1",
+        "isMultiKey": false,
+        "direction": "forward",
+        "indexBounds": { "status": ["[\"open\", \"open\"]"] }
+      }
+    },
+    "rejectedPlans": []
+  },
+  "executionStats": {
+    "executionSuccess": true,
+    "nReturned": 3000,
+    "executionTimeMillis": 2140,
+    "totalKeysExamined": 900000,
+    "totalDocsExamined": 900000,
+    "executionStages": {
+      "stage": "FETCH",
+      "filter": { "assigneeId": { "$eq": "u_3311" } },
+      "nReturned": 3000,
+      "executionTimeMillisEstimate": 2050,
+      "docsExamined": 900000,
+      "inputStage": {
+        "stage": "IXSCAN",
+        "nReturned": 900000,
+        "executionTimeMillisEstimate": 340,
+        "keyPattern": { "status": 1 },
+        "indexName": "status_1",
+        "direction": "forward",
+        "keysExamined": 900000,
+        "seeks": 1
+      }
+    }
+  },
+  "serverInfo": { "version": "8.0.4" },
+  "command": {
+    "aggregate": "tickets",
+    "pipeline": [{ "$match": { "status": "open", "assigneeId": "u_3311" } }],
+    "cursor": {},
+    "$db": "shop"
+  },
+  "ok": 1
+}

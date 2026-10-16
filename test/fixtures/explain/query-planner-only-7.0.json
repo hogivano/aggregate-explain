@@ -1,0 +1,22 @@
+{
+  "explainVersion": "1",
+  "queryPlanner": {
+    "namespace": "shop.sessions",
+    "parsedQuery": { "expiresAt": { "$lt": { "$date": "2026-09-09T00:00:00Z" } } },
+    "optimizedPipeline": true,
+    "winningPlan": {
+      "stage": "COLLSCAN",
+      "filter": { "expiresAt": { "$lt": { "$date": "2026-09-09T00:00:00Z" } } },
+      "direction": "forward"
+    },
+    "rejectedPlans": []
+  },
+  "serverInfo": { "version": "7.0.14" },
+  "command": {
+    "aggregate": "sessions",
+    "pipeline": [{ "$match": { "expiresAt": { "$lt": "2026-09-09T00:00:00Z" } } }],
+    "cursor": {},
+    "$db": "shop"
+  },
+  "ok": 1
+}

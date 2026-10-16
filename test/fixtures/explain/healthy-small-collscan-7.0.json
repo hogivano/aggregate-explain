@@ -1,0 +1,37 @@
+{
+  "explainVersion": "1",
+  "queryPlanner": {
+    "namespace": "shop.currencies",
+    "parsedQuery": { "active": { "$eq": true } },
+    "optimizedPipeline": true,
+    "winningPlan": {
+      "stage": "COLLSCAN",
+      "filter": { "active": { "$eq": true } },
+      "direction": "forward"
+    },
+    "rejectedPlans": []
+  },
+  "executionStats": {
+    "executionSuccess": true,
+    "nReturned": 40,
+    "executionTimeMillis": 1,
+    "totalKeysExamined": 0,
+    "totalDocsExamined": 400,
+    "executionStages": {
+      "stage": "COLLSCAN",
+      "filter": { "active": { "$eq": true } },
+      "nReturned": 40,
+      "executionTimeMillisEstimate": 0,
+      "direction": "forward",
+      "docsExamined": 400
+    }
+  },
+  "serverInfo": { "version": "7.0.14" },
+  "command": {
+    "aggregate": "currencies",
+    "pipeline": [{ "$match": { "active": true } }],
+    "cursor": {},
+    "$db": "shop"
+  },
+  "ok": 1
+}

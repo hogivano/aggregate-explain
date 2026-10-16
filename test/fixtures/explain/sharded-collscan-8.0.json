@@ -1,0 +1,77 @@
+{
+  "shards": {
+    "shard01": {
+      "explainVersion": "1",
+      "queryPlanner": {
+        "namespace": "shop.readings",
+        "parsedQuery": { "deviceId": { "$eq": "d_1099" } },
+        "optimizedPipeline": true,
+        "winningPlan": {
+          "stage": "COLLSCAN",
+          "filter": { "deviceId": { "$eq": "d_1099" } },
+          "direction": "forward"
+        },
+        "rejectedPlans": []
+      },
+      "executionStats": {
+        "executionSuccess": true,
+        "nReturned": 210,
+        "executionTimeMillis": 940,
+        "totalKeysExamined": 0,
+        "totalDocsExamined": 820000,
+        "executionStages": {
+          "stage": "COLLSCAN",
+          "filter": { "deviceId": { "$eq": "d_1099" } },
+          "nReturned": 210,
+          "executionTimeMillisEstimate": 910,
+          "direction": "forward",
+          "docsExamined": 820000
+        }
+      },
+      "serverInfo": { "version": "8.0.4" }
+    },
+    "shard02": {
+      "explainVersion": "1",
+      "queryPlanner": {
+        "namespace": "shop.readings",
+        "parsedQuery": { "deviceId": { "$eq": "d_1099" } },
+        "optimizedPipeline": true,
+        "winningPlan": {
+          "stage": "COLLSCAN",
+          "filter": { "deviceId": { "$eq": "d_1099" } },
+          "direction": "forward"
+        },
+        "rejectedPlans": []
+      },
+      "executionStats": {
+        "executionSuccess": true,
+        "nReturned": 190,
+        "executionTimeMillis": 1120,
+        "totalKeysExamined": 0,
+        "totalDocsExamined": 790000,
+        "executionStages": {
+          "stage": "COLLSCAN",
+          "filter": { "deviceId": { "$eq": "d_1099" } },
+          "nReturned": 190,
+          "executionTimeMillisEstimate": 1090,
+          "direction": "forward",
+          "docsExamined": 790000
+        }
+      },
+      "serverInfo": { "version": "8.0.4" }
+    }
+  },
+  "mergeType": "mongos",
+  "splitPipeline": {
+    "shardsPart": [{ "$match": { "deviceId": "d_1099" } }],
+    "mergerPart": []
+  },
+  "serverInfo": { "version": "8.0.4" },
+  "command": {
+    "aggregate": "readings",
+    "pipeline": [{ "$match": { "deviceId": "d_1099" } }],
+    "cursor": {},
+    "$db": "shop"
+  },
+  "ok": 1
+}

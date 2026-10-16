@@ -1,0 +1,57 @@
+{
+  "explainVersion": "1",
+  "queryPlanner": {
+    "namespace": "shop.applications",
+    "indexFilterSet": false,
+    "parsedQuery": {
+      "$and": [
+        { "organisationId": { "$eq": "org_42" } },
+        { "status": { "$eq": "pending" } }
+      ]
+    },
+    "optimizedPipeline": true,
+    "queryHash": "9F1C2A70",
+    "planCacheKey": "4D0E5B11",
+    "winningPlan": {
+      "stage": "COLLSCAN",
+      "filter": {
+        "$and": [
+          { "organisationId": { "$eq": "org_42" } },
+          { "status": { "$eq": "pending" } }
+        ]
+      },
+      "direction": "forward"
+    },
+    "rejectedPlans": []
+  },
+  "executionStats": {
+    "executionSuccess": true,
+    "nReturned": 3100,
+    "executionTimeMillis": 1187,
+    "totalKeysExamined": 0,
+    "totalDocsExamined": 1240000,
+    "executionStages": {
+      "stage": "COLLSCAN",
+      "filter": {
+        "$and": [
+          { "organisationId": { "$eq": "org_42" } },
+          { "status": { "$eq": "pending" } }
+        ]
+      },
+      "nReturned": 3100,
+      "executionTimeMillisEstimate": 1102,
+      "works": 1240002,
+      "advanced": 3100,
+      "direction": "forward",
+      "docsExamined": 1240000
+    }
+  },
+  "serverInfo": { "version": "6.0.14" },
+  "command": {
+    "aggregate": "applications",
+    "pipeline": [{ "$match": { "organisationId": "org_42", "status": "pending" } }],
+    "cursor": {},
+    "$db": "shop"
+  },
+  "ok": 1
+}

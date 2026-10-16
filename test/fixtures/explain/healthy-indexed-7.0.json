@@ -1,0 +1,71 @@
+{
+  "explainVersion": "1",
+  "stages": [
+    {
+      "$cursor": {
+        "queryPlanner": {
+          "namespace": "shop.invoices",
+          "parsedQuery": { "accountId": { "$eq": "acc_9" } },
+          "winningPlan": {
+            "stage": "FETCH",
+            "inputStage": {
+              "stage": "IXSCAN",
+              "keyPattern": { "accountId": 1, "issuedAt": -1 },
+              "indexName": "accountId_1_issuedAt_-1",
+              "isMultiKey": false,
+              "direction": "forward",
+              "indexBounds": { "accountId": ["[\"acc_9\", \"acc_9\"]"], "issuedAt": ["[MaxKey, MinKey]"] }
+            }
+          },
+          "rejectedPlans": []
+        },
+        "executionStats": {
+          "executionSuccess": true,
+          "nReturned": 120,
+          "executionTimeMillis": 4,
+          "totalKeysExamined": 120,
+          "totalDocsExamined": 120,
+          "executionStages": {
+            "stage": "FETCH",
+            "nReturned": 120,
+            "executionTimeMillisEstimate": 1,
+            "docsExamined": 120,
+            "inputStage": {
+              "stage": "IXSCAN",
+              "nReturned": 120,
+              "executionTimeMillisEstimate": 0,
+              "keyPattern": { "accountId": 1, "issuedAt": -1 },
+              "indexName": "accountId_1_issuedAt_-1",
+              "direction": "forward",
+              "keysExamined": 120,
+              "seeks": 1
+            }
+          }
+        }
+      },
+      "nReturned": 120,
+      "executionTimeMillisEstimate": 4
+    },
+    {
+      "$group": { "_id": "$currency", "total": { "$sum": "$amount" } },
+      "maxAccumulatorMemoryUsageBytes": { "total": 144 },
+      "totalOutputDataSizeBytes": 432,
+      "usedDisk": false,
+      "spills": 0,
+      "spilledBytes": 0,
+      "nReturned": 3,
+      "executionTimeMillisEstimate": 4
+    }
+  ],
+  "serverInfo": { "version": "7.0.14" },
+  "command": {
+    "aggregate": "invoices",
+    "pipeline": [
+      { "$match": { "accountId": "acc_9" } },
+      { "$group": { "_id": "$currency", "total": { "$sum": "$amount" } } }
+    ],
+    "cursor": {},
+    "$db": "shop"
+  },
+  "ok": 1
+}

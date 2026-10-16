@@ -1,0 +1,49 @@
+{
+  "name": "aggregate-explain",
+  "version": "0.1.0",
+  "description": "Tells you why a MongoDB aggregation is slow, in English instead of 400 lines of JSON.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "bin": { "aggregate-explain": "./dist/cli.js" },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./mongoose": {
+      "types": "./dist/mongoose/index.d.ts",
+      "default": "./dist/mongoose/index.js"
+    }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --test --experimental-strip-types 'test/**/*.test.ts'",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mongodb",
+    "mongoose",
+    "aggregation",
+    "explain",
+    "performance",
+    "slow-query",
+    "index",
+    "collscan",
+    "cli"
+  ],
+  "peerDependencies": {
+    "mongoose": ">=5 <10"
+  },
+  "peerDependenciesMeta": {
+    "mongoose": { "optional": true }
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.0"
+  }
+}

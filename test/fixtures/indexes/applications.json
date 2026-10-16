@@ -1,0 +1,7 @@
+{
+  "indexes": [
+    { "v": 2, "key": { "_id": 1 }, "name": "_id_" },
+    { "v": 2, "key": { "status": 1 }, "name": "status_1" }
+  ],
+  "documentCount": 4010000
+}

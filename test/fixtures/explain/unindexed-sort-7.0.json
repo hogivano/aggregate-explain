@@ -1,0 +1,72 @@
+{
+  "explainVersion": "1",
+  "queryPlanner": {
+    "namespace": "shop.posts",
+    "parsedQuery": { "authorId": { "$eq": "a_18" } },
+    "optimizedPipeline": true,
+    "winningPlan": {
+      "stage": "SORT",
+      "sortPattern": { "createdAt": -1 },
+      "memLimit": 104857600,
+      "type": "simple",
+      "inputStage": {
+        "stage": "FETCH",
+        "inputStage": {
+          "stage": "IXSCAN",
+          "keyPattern": { "authorId": 1 },
+          "indexName": "authorId_1",
+          "isMultiKey": false,
+          "direction": "forward",
+          "indexBounds": { "authorId": ["[\"a_18\", \"a_18\"]"] }
+        }
+      }
+    },
+    "rejectedPlans": []
+  },
+  "executionStats": {
+    "executionSuccess": true,
+    "nReturned": 24000,
+    "executionTimeMillis": 310,
+    "totalKeysExamined": 24000,
+    "totalDocsExamined": 24000,
+    "executionStages": {
+      "stage": "SORT",
+      "nReturned": 24000,
+      "executionTimeMillisEstimate": 290,
+      "sortPattern": { "createdAt": -1 },
+      "memLimit": 104857600,
+      "memUsage": 33554432,
+      "totalDataSizeSortedBytesEstimate": 33554432,
+      "usedDisk": false,
+      "spills": 0,
+      "type": "simple",
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 24000,
+        "executionTimeMillisEstimate": 120,
+        "docsExamined": 24000,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 24000,
+          "executionTimeMillisEstimate": 20,
+          "keyPattern": { "authorId": 1 },
+          "indexName": "authorId_1",
+          "direction": "forward",
+          "keysExamined": 24000,
+          "seeks": 1
+        }
+      }
+    }
+  },
+  "serverInfo": { "version": "7.0.14" },
+  "command": {
+    "aggregate": "posts",
+    "pipeline": [
+      { "$match": { "authorId": "a_18" } },
+      { "$sort": { "createdAt": -1 } }
+    ],
+    "cursor": {},
+    "$db": "shop"
+  },
+  "ok": 1
+}

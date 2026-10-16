@@ -1,0 +1,86 @@
+{
+  "explainVersion": "1",
+  "stages": [
+    {
+      "$cursor": {
+        "queryPlanner": {
+          "namespace": "shop.orders",
+          "indexFilterSet": false,
+          "parsedQuery": { "status": { "$eq": "shipped" } },
+          "queryHash": "A1B2C3D4",
+          "planCacheKey": "E5F6A7B8",
+          "winningPlan": {
+            "stage": "FETCH",
+            "inputStage": {
+              "stage": "IXSCAN",
+              "keyPattern": { "status": 1 },
+              "indexName": "status_1",
+              "isMultiKey": false,
+              "isUnique": false,
+              "isSparse": false,
+              "isPartial": false,
+              "indexVersion": 2,
+              "direction": "forward",
+              "indexBounds": { "status": ["[\"shipped\", \"shipped\"]"] }
+            }
+          },
+          "rejectedPlans": []
+        },
+        "executionStats": {
+          "executionSuccess": true,
+          "nReturned": 1840000,
+          "executionTimeMillis": 1204,
+          "totalKeysExamined": 1840000,
+          "totalDocsExamined": 1840000,
+          "executionStages": {
+            "stage": "FETCH",
+            "nReturned": 1840000,
+            "executionTimeMillisEstimate": 1180,
+            "works": 1840001,
+            "advanced": 1840000,
+            "docsExamined": 1840000,
+            "inputStage": {
+              "stage": "IXSCAN",
+              "nReturned": 1840000,
+              "executionTimeMillisEstimate": 240,
+              "works": 1840001,
+              "advanced": 1840000,
+              "keyPattern": { "status": 1 },
+              "indexName": "status_1",
+              "direction": "forward",
+              "keysExamined": 1840000,
+              "seeks": 1,
+              "dupsTested": 0
+            }
+          }
+        }
+      },
+      "nReturned": 1840000,
+      "executionTimeMillisEstimate": 1204
+    },
+    {
+      "$group": { "_id": "$customerId", "total": { "$sum": "$amount" } },
+      "maxAccumulatorMemoryUsageBytes": { "total": 8 },
+      "totalOutputDataSizeBytes": 96468992,
+      "usedDisk": true,
+      "spills": 3,
+      "spilledBytes": 93323264,
+      "spilledRecords": 412000,
+      "spilledDataStorageSize": 41943040,
+      "nReturned": 412000,
+      "executionTimeMillisEstimate": 4213
+    }
+  ],
+  "serverInfo": { "version": "7.0.14" },
+  "command": {
+    "aggregate": "orders",
+    "pipeline": [
+      { "$match": { "status": "shipped" } },
+      { "$group": { "_id": "$customerId", "total": { "$sum": "$amount" } } }
+    ],
+    "allowDiskUse": true,
+    "cursor": {},
+    "$db": "shop"
+  },
+  "ok": 1
+}
